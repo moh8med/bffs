@@ -33,6 +33,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            Route::middleware('api')
+                ->group(base_path('routes/bff.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
@@ -46,7 +49,11 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(30)->by($request->user()?->id ?: $request->ip());
+        });
+
+        RateLimiter::for('bff-write', function (Request $request) {
+            return Limit::perMinute(12)->by($request->user()?->id ?: $request->ip());
         });
     }
 }
