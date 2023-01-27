@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "propaganistas/laravel-disposable-email": "^2.2",
+        "spatie/laravel-uptime-monitor": "^4.2",
         "torann/geoip": "^3.0"
     },
     "require-dev": {

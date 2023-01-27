@@ -19,6 +19,14 @@ class Kernel extends ConsoleKernel
 
         // update the disposable domains list
         $schedule->command('disposable:update')->weekly();
+
+        // update geoip database
+        $schedule->command('geoip:update')->weekly();
+        $schedule->command('geoip:clear')->weekly();
+
+        // uptime and ssl monitor
+        $schedule->command('monitor:check-uptime')->everyMinute();
+        $schedule->command('monitor:check-certificate')->daily();
     }
 
     /**
