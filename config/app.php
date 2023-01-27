@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\BffServiceProvider::class,
 
         /*
          * Application Service Providers...

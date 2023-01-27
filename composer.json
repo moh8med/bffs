@@ -6,11 +6,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "geoip2/geoip2": "~2.1",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.19",
         "laravel/octane": "^1.4",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "propaganistas/laravel-disposable-email": "^2.2",
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

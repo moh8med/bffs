@@ -16,3 +16,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/.phpintel
+/storage/framework/disposable_domains.json
+/notes.txt
