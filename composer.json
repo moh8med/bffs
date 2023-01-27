@@ -15,6 +15,7 @@
         "propaganistas/laravel-disposable-email": "^2.2",
         "propaganistas/laravel-phone": "^4.4",
         "spatie/laravel-uptime-monitor": "^4.2",
+        "sunspikes/clamav-validator": "^2.6",
         "torann/geoip": "^3.0"
     },
     "require-dev": {

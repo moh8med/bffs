@@ -37,6 +37,10 @@ return [
                 ->symbols()
                 ->uncompromised()
             ],
+            'file'      => ['bail', 'file', 'clamav'],
+            'files.*'   => ['bail', 'file', 'clamav'],
+            'image'     => ['bail', 'file', 'image', 'clamav'],
+            'images.*'  => ['bail', 'file', 'image', 'clamav'],
         ],
     ],
 ];
