@@ -45,13 +45,25 @@ return [
             ],
 
             // please don't change this rule.
-            '_custom_file_rule'      => ['bail', 'file', 'clamav'],
+            // it's used to scan all uploaded files with Cisco ClamAV.
+            '_custom_file_rule' => [
+                'bail',
+                File::types([
+                    'jpg', 'png', 'gif', 'webp',
+                    'pdf', 'csv',
+                    'docx', 'xlsx', 'pptx',
+                    'doc',  'xls', 'ppt',
+                    'odt', 'ods', 'odp',
+                ])
+                    ->max(10 * 1024),
+                'clamav',
+            ],
 
             'image'     => [
                 'bail',
-                // File::types(['jpg', 'png', 'gif'])->max(10 * 1024),
-                File::image()->max(10 * 1024),
-                'mimes:jpg,png,gif,webp',
+                File::types(['jpg', 'png', 'gif', 'webp'])
+                    ->image()
+                    ->max(10 * 1024),
                 'clamav',
             ],
         ],
