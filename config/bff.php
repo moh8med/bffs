@@ -29,6 +29,7 @@ return [
     'validation' => [
         'rules' => [
             'email' => ['bail', 'string', 'email:rfc,dns,spoof', 'indisposable'],
+            'phone' => ['bail', 'string', 'phone:EG,SA,mobile'],
             'password' => ['bail', 'string', Password::min(8)
                 ->letters()
                 ->mixedCase()
