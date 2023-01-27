@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rules\Password;
 
 return [
@@ -28,8 +29,13 @@ return [
 
     'validation' => [
         'rules' => [
+            // validate email address format and domain.
             'email' => ['bail', 'string', 'email:rfc,dns,spoof', 'indisposable'],
+
+            // validate phone number country and type.
             'phone' => ['bail', 'string', 'phone:EG,SA,mobile'],
+
+            // validate password strength and checks whether it appears on the have I been pwned list.
             'password' => ['bail', 'string', Password::min(8)
                 ->letters()
                 ->mixedCase()
@@ -37,10 +43,17 @@ return [
                 ->symbols()
                 ->uncompromised()
             ],
-            'file'      => ['bail', 'file', 'clamav'],
-            'files.*'   => ['bail', 'file', 'clamav'],
-            'image'     => ['bail', 'file', 'image', 'clamav'],
-            'images.*'  => ['bail', 'file', 'image', 'clamav'],
+
+            // please don't change this rule.
+            '_custom_file_rule'      => ['bail', 'file', 'clamav'],
+
+            'image'     => [
+                'bail',
+                // File::types(['jpg', 'png', 'gif'])->max(10 * 1024),
+                File::image()->max(10 * 1024),
+                'mimes:jpg,png,gif,webp',
+                'clamav',
+            ],
         ],
     ],
 ];

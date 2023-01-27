@@ -18,9 +18,19 @@ class BffController extends Controller
 
             // register validation rules
             foreach (config('bff.validation.rules') as $key => $value) {
-                if ($request->input($key)) {
+                if ($request->has($key)) {
                     $rules[$key] = $value;
                 }
+            }
+
+            // register uploaded files to scan with ClamAV
+            $rule = config('bff.validation.rules._custom_file_rule');
+            foreach ($request->files->all() as $key => $file) {
+                if (isset($rules[$key])) {
+                    continue;
+                }
+
+                $rules[$key] = $rule;
             }
 
             if ($rules) {
