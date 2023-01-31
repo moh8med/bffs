@@ -1,95 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\BffRequest;
+use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password;
 
 class BffController extends Controller
 {
-    public function __invoke(Request $request, string $uri)
+    public function request(Request $request, string $uri): Response
     {
-        // request validation
-        if (in_array($request->method(), ['POST', 'PUT', 'PATCH'])) {
-            $rules = [];
+        $response = Http::bff($request)
+            ->acceptJson()
+            ->send($request->method(), $request->route()->getPrefix() . '/' . $uri, [
+                'query' => $request->query(),
+            ]);
 
-            // register validation rules
-            foreach (config('bff.validation.rules') as $key => $value) {
-                if ($request->has($key)) {
-                    $rules[$key] = $value;
-                }
-            }
+        return bff_response($response);
+    }
 
-            // register uploaded files to scan with ClamAV
-            $rule = config('bff.validation.rules._custom_file_rule');
-            foreach ($request->files->all() as $key => $file) {
-                if (isset($rules[$key])) {
-                    continue;
-                }
-
-                $rules[$key] = $rule;
-            }
-
-            if ($rules) {
-                $validator = Validator::make($request->all(), $rules);
-
-                if ($validator->fails()) {
-                    return response()
-                        ->json($validator->errors(), 422);
-                }
-            }
-        }
-
-        // prepare and send request
+    public function multipartRequest(BffRequest $request, string $uri): Response
+    {
+        $multipart = request_multipart($request->files->all());
 
         $response = Http::bff($request)
             ->acceptJson()
             ->send($request->method(), $request->route()->getPrefix() . '/' . $uri, [
-                (
-                    in_array($request->method(), ['POST', 'PUT', 'PATCH'])
-                        ? 'form_params'
-                        : 'query'
-                ) => $request->all(),
+                'query' => $request->except(files_keys($multipart)),
+                'multipart' => $multipart,
             ]);
 
-        // Error handling
+        return bff_response($response);
+    }
 
-        // if ($response->unauthorized()) {
-        //     return response('Unauthorized.')
-        //         ->withHeaders([
-        //             'X-Powered-By' => null,
-        //             'Server' => 'Apache',
-        //         ])
-        //         ->setStatusCode($response->status());
-        // }
+    public function aggregation(Request $request): Response
+    {
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->as('users')->bff($request)->acceptJson()->get('/api/users'),
+            $pool->as('products')->bff($request)->acceptJson()->get('/api/products'),
+        ]);
 
-        // if ($response->forbidden()) {
-        //     return response('Forbidden.')
-        //         ->withHeaders([
-        //             'X-Powered-By' => null,
-        //             'Server' => 'Apache',
-        //         ])
-        //         ->setStatusCode($response->status());
-        // }
-
-        if ($response->serverError()) {
-            return response('An unexpected error occurred.')
-                ->withHeaders([
-                    'X-Powered-By' => null,
-                    'Server' => 'Apache',
-                ])
-                ->setStatusCode($response->status());
-        }
-
-        return response($response->getBody())
-            ->withHeaders($response->headers())
-            ->withHeaders([
-                'X-Powered-By' => null,
-                'Server' => 'Apache',
-            ])
-            ->setStatusCode($response->status());
+        return bff_response($responses);
     }
 }

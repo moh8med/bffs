@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::match(['GET', 'HEAD', 'OPTIONS'], '{uri}', BffController::class)
+Route::get('/aggregation', [BffController::class, 'aggregation'])
+    ->middleware('cacheResponse:5');
+
+Route::match(['GET', 'HEAD', 'OPTIONS'], '{uri}', [BffController::class, 'request'])
     ->where('uri', '.*')
     ->fallback();
 
-Route::match(['POST', 'PUT', 'PATCH', 'DELETE'], '{uri}', BffController::class)
+Route::delete('{uri}', [BffController::class, 'request'])
+    ->middleware('throttle:bff-write')
+    ->where('uri', '.*')
+    ->fallback();
+
+Route::match(['POST', 'PUT', 'PATCH'], '{uri}', [BffController::class, 'multipartRequest'])
     ->middleware('throttle:bff-write')
     ->where('uri', '.*')
     ->fallback();

@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         // 'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequestsWithRedis::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
     ];
 }
