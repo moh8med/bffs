@@ -63,27 +63,24 @@ Here are some key points about BFFS:
 
 ## Getting Started
 
-To get started with BFFS, you will need to have a basic understanding of Laravel and its dependencies. 
+To get started with BFFS, you will need to have a basic understanding of Laravel and its dependencies.
 
-1. Clone the repository:
-```
-git clone https://github.com/moh8med/bffs.git
-```
+### Installation
 
-2. Install dependencies:
-```
-composer install
+1. Install the package via composer:
+```bash
+composer create-project moh8med/bffs
 ```
 
-3. Configure your environment variables in the .env file
-
-4. Run the migrations:
-```
+2. Run the migrations:
+```bash
 php artisan migrate
 ```
 
-5. Base installation:
-```
+3. Configure your environment variables in the .env file.
+
+4. Update the databases: 
+```bash
 # update the disposable domains list
 php artisan disposable:update
 
@@ -92,7 +89,10 @@ php artisan geoip:update
 
 # retrieves and cache Cloudflare's IP blocks
 php artisan cloudflare:reload
+```
 
+5. Create your first uptime monitor:
+```bash
 # create your first monitor
 php artisan monitor:create https://example.com/
 
@@ -100,19 +100,19 @@ php artisan monitor:create https://example.com/
 php artisan monitor:check-uptime
 ```
 
-6. Start the server:
-```
+### Usage
+
+Once the server is running, you can start making requests to the endpoints that are protected by the BFFS shield.
+
+1. Start the server:
+```bash
 php artisan octane:start --port=8001 --watch
 ```
 
-7. Test your BFFS server:
-```
+2. Test your BFFS server:
+```bash
 curl http://127.0.0.1:8001/todos | jq
 ```
-
-## Usage
-
-Once the server is running, you can start making requests to the endpoints that are protected by the BFFS shield.
 
 ## Contributions
 
