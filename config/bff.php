@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Validation\Rules\File;
-use Illuminate\Validation\Rules\Password;
 
 return [
     'base_url' => env('BFF_BASE_URL'),
@@ -12,12 +10,7 @@ return [
 
         'countries' => [
             'only'   => [], // EG, SA, etc...
-            'except' => [   // RU, CN, etc...
-                'RU', 'UA', 'PL',
-                'CN', 'HK', 'TW', 'SG',
-                'IL', 'LY', 'MA',
-                'IR', 'PK', 'AF', 'ID',
-            ],
+            'except' => [], // RU, CN, etc...
         ],
 
         // See: https://www.php.net/manual/en/function.geoip-continent-code-by-name.php
