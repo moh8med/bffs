@@ -84,11 +84,13 @@ php artisan migrate
 # update the disposable domains list
 php artisan disposable:update
 
-# update geoip database
-php artisan geoip:update
-
 # retrieves and cache Cloudflare's IP blocks
 php artisan cloudflare:reload
+
+# register for a license key at www.maxmind.com
+# set your MAXMIND_LICENSE_KEY in .env file
+# and update the geoip database
+php artisan geoip:update
 ```
 
 5. Create your first uptime monitor:
