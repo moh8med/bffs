@@ -27,6 +27,9 @@ class Kernel extends ConsoleKernel
         // uptime and ssl monitor
         $schedule->command('monitor:check-uptime')->everyMinute();
         $schedule->command('monitor:check-certificate')->daily();
+
+        // retrieves and cache Cloudflare's IP blocks
+        $schedule->command('cloudflare:reload')->daily();
     }
 
     /**

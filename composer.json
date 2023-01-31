@@ -12,6 +12,7 @@
         "laravel/octane": "^1.4",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "monicahq/laravel-cloudflare": "^3.3",
         "propaganistas/laravel-disposable-email": "^2.2",
         "propaganistas/laravel-phone": "^4.4",
         "spatie/laravel-responsecache": "^7.4",
