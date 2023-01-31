@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "moh8med/bffs",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "BFFS is a simple project built with Laravel that implements the backend for frontend pattern to help you build a security shield in front of your APIs and Microservices.",
+    "keywords": ["bffs", "laravel", "security", "api", "waf", "geoip", "cloudflare", "clamav"],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
