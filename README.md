@@ -102,6 +102,19 @@ php artisan monitor:create https://example.com/
 php artisan monitor:check-uptime
 ```
 
+6. You will need Cisco ClamAV installed to scan uploaded files against malwares:
+```bash
+docker run \
+    --interactive \
+    --publish 13310:3310 \
+    --publish 7357 \
+    --tty \
+    --rm \
+    --name "clam_container_01" \
+    clamav/clamav:unstable
+```
+Then set `CLAMAV_SKIP_VALIDATION=false` in the `.env` file.
+
 ### Usage
 
 Once the server is running, you can start making requests to the endpoints that are protected by the BFFS shield.
