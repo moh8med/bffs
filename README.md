@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🔰 BFFS - Backend for Frontend Shield
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+BFFS is a simple project built with Laravel that implements the backend for frontend pattern to help you build a security shield in front of your APIs and Microservices.
 
-## About Laravel
+Here are some key points about BFFS:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Implements the backend for frontend pattern to separate the concerns of the frontend and backend and improve security.
+- Includes advanced request validation features, such as E.164 international phone number standard, password NIST standards, email RFC and DNS validation, email spoofing detection, and scanning uploaded files with Cisco ClamAV.
+- Uses Redis for rate limiting requests to improve security and reduce the risk of DDoS attacks.
+- Utilizes Swoole to speed up response time and improve overall performance.
+- Built using Laravel, a popular PHP web application framework, making it easy to integrate with existing systems.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Monitoring
+- [x] Uptime Monitor
+- [x] SSL Certificate Expiry
+- [x] Email notification
+- [x] Slack notification
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Performance Tuning
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [x] Running on Octane (Swoole or Roadrunner)
+- [x] API Aggregation
+- [x] Response Caching with Redis
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Security Hardening
 
-### Premium Partners
+- [x] Trusted Hosts
+- [x] Add Cloudflare IPs to Trusted Proxies
+- [x] CORS Handling
+- [x] Rate Limiting with Redis
+- [x] Restricting Access by GeoIP2 (MaxMind DB)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
 
-## Contributing
+### Web Application Firewall (WAF)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- [ ] Bot: Bad Bot Detection
+- [ ] RFI: Remote File Inclusion
+- [ ] XSS: Cross Site Scripting
+- [ ] SQLi: SQL Injection
 
-## Code of Conduct
+### Antivirus and Malware
+- [x] Scanning uploaded files with Cisco ClamAV
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+### Advanced Request Validation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- [x] Email RFC compliance
+- [x] Email domain DNS 
+- [x] Email disposable/throwaway domains
+- [x] Email spoofing detection
+- [ ] Email deliverability check
+- [x] Password NIST standards
+- [x] HaveIBeenPwned password check
+- [x] Phone country prefix checking and E.164 standard
+- [x] Phone number type: mobile, landline, etc
+- [ ] Phone number verification
+
+
+## Getting Started
+
+To get started with BFFS, you will need to have a basic understanding of Laravel and its dependencies. 
+
+1. Clone the repository:
+```
+git clone https://github.com/yourusername/BFFS.git
+```
+
+2. Install dependencies:
+```
+composer install
+```
+
+3. Configure your environment variables in the .env file
+
+4. Run the migrations:
+```
+php artisan migrate
+```
+
+5. Start the server:
+```
+php artisan octane:start --port=8001 --watch
+```
+
+## Usage
+
+Once the server is running, you can start making requests to the endpoints that are protected by the BFFS shield.
+
+## Contributions
+
+If you would like to contribute to the project, please feel free to open a pull request with your changes.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
