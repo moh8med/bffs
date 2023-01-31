@@ -67,7 +67,7 @@ To get started with BFFS, you will need to have a basic understanding of Laravel
 
 1. Clone the repository:
 ```
-git clone https://github.com/yourusername/BFFS.git
+git clone https://github.com/moh8med/bffs.git
 ```
 
 2. Install dependencies:
@@ -82,9 +82,32 @@ composer install
 php artisan migrate
 ```
 
-5. Start the server:
+5. Base installation:
+```
+# update the disposable domains list
+php artisan disposable:update
+
+# update geoip database
+php artisan geoip:update
+
+# retrieves and cache Cloudflare's IP blocks
+php artisan cloudflare:reload
+
+# create your first monitor
+php artisan monitor:create https://example.com/
+
+# check the uptime of all sites
+php artisan monitor:check-uptime
+```
+
+6. Start the server:
 ```
 php artisan octane:start --port=8001 --watch
+```
+
+7. Test your BFFS server:
+```
+curl http://127.0.0.1:8001/todos | jq
 ```
 
 ## Usage
